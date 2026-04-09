@@ -4,20 +4,15 @@
 .partners-scroll{
   display:flex;
   align-items:center;
-  gap:24px;
   overflow:hidden;
   padding:16px 0;
-  width: 1280;
-  height: 170;
   max-width: 1280px;
-  gap: 32;
-  angle: 0 deg;
+  gap: 32px;
   opacity: 1;
-  width: 1280;
-  height: 100;
+  width: 1280px;
+  height: 100px;
   justify-content: space-between;
   angle: 0 deg;
-  opacity: 1;
 }
 .partners-scroll::-webkit-scrollbar {
   display: none;
@@ -39,7 +34,6 @@
   padding-bottom: 5px;
   padding-left: 4px;
   border-width: 1px;
-  padding: 16px;
   gap: 24px;
   angle: 0 deg;
   opacity: 1;
