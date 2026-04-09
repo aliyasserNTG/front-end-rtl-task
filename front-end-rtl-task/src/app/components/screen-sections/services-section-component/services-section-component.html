@@ -1,0 +1,113 @@
+<section class="services-section" aria-labelledby="services-title">
+
+  <!-- Section header -->
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title" id="services-title">قسم الخدمات</h2>
+        <p class="section-desc">
+          هنا يمكنك إضافة وصف مختصر حول الغرض من البوابة متبوعاً بزر الحث على اتخاذ إجراء
+          أو رسم توضيحي على الجانب الأيسر.
+        </p>
+      </div>
+      <button class="btn-show-all" aria-label="عرض جميع الخدمات">عرض الكل</button>
+    </div>
+  </div>
+
+  <!--
+    p-carousel
+    ──────────
+    • [value]              — the data array to iterate over
+    • [numVisible]         — cards visible at once (desktop default: 4)
+    • [numScroll]          — cards to advance per click (1 keeps it smooth)
+    • [responsiveOptions]  — breakpoint overrides defined in the component
+    • [circular]           — wraps around at both ends
+    • [showIndicators]     — renders the dot pagination below the track
+    • [showNavigators]     — renders the prev/next arrow buttons
+    • styleClass           — extra host class so we can target the wrapper in CSS
+  -->
+  <p-carousel
+    [value]="services"
+    [numVisible]="4"
+    [numScroll]="1"
+    [responsiveOptions]="responsiveOptions"
+    [circular]="true"
+    [showIndicators]="true"
+    [showNavigators]="true"
+    styleClass="services-carousel"
+    aria-label="قائمة الخدمات"
+  >
+
+    <!-- ── Custom previous-button template ── -->
+    <ng-template pTemplate="previousicon">
+      <button class="c-arrow" aria-label="السابق">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="10,4 6,8 10,12"/>
+        </svg>
+      </button>
+    </ng-template>
+
+    <!-- ── Custom next-button template ── -->
+    <ng-template pTemplate="nexticon">
+      <button class="c-arrow" aria-label="التالي">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="6,4 10,8 6,12"/>
+        </svg>
+      </button>
+    </ng-template>
+
+    <!-- ── Card item template ── -->
+    <ng-template pTemplate="item" let-service>
+      <div
+        class="service-card"
+        role="listitem"
+        tabindex="0"
+        [attr.aria-label]="'خدمة ' + service.title"
+        (click)="navigateToService()"
+        (keydown.enter)="navigateToService()"
+      >
+        <!-- Check icon -->
+        <div class="service-card-check" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="2,8 6,12 14,4"/>
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <h3 class="service-card-title">{{ service.title }}</h3>
+
+        <!-- Description -->
+        <p class="service-card-desc">{{ service.description }}</p>
+
+        <!-- Tags -->
+        <div class="service-tags">
+          @for(tag of service.tags; track tag)
+          {
+            <span class="service-tag">{{ tag }}</span>
+          }
+
+        </div>
+
+        <!-- Actions -->
+        <div class="service-card-actions">
+          <button
+            class="btn-action-primary"
+            (click)="$event.stopPropagation(); navigateToService()"
+            [attr.aria-label]="'إجراء رئيسي لـ ' + service.title"
+          >
+            إجراء
+          </button>
+          <button
+            class="btn-action-secondary"
+            (click)="$event.stopPropagation()"
+            [attr.aria-label]="'إجراء ثانوي لـ ' + service.title"
+          >
+            إجراء ثانوي
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+  </p-carousel>
+
+</section>
