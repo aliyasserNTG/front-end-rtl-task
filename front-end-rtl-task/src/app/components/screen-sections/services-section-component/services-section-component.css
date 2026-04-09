@@ -1,0 +1,277 @@
+.services-section{background:var(--gray-50);padding:48px 0;border-bottom:1px solid var(--gray-200)}
+.services-scroll{display:flex;gap:16px;overflow-x:auto;padding:0 24px;scrollbar-width:none}
+.services-scroll::-webkit-scrollbar{display:none}
+.service-card{min-width:220px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:20px;flex-shrink:0;cursor:pointer;transition:box-shadow .2s,transform .2s}
+.service-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.service-card-check{width:28px;height:28px;background:var(--green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.service-card-check svg{width:14px;height:14px;color:var(--green)}
+.service-card-title{font-size:14px;font-weight:600;margin-bottom:6px}
+.service-card-desc{font-size:12px;color:var(--gray-500);margin-bottom:12px;line-height:1.5}
+.service-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.service-tag{padding:2px 8px;background:var(--gray-100);border-radius:100px;font-size:11px;color:var(--gray-600)}
+.service-card-actions{display:flex;gap:8px}
+.btn-action-primary{flex:1;padding:7px;background:var(--green);color:var(--white);border-radius:var(--radius);font-size:13px;font-weight:500;text-align:center;cursor:pointer}
+.btn-action-primary:hover{background:var(--green-dark)}
+.btn-action-secondary{flex:1;padding:7px;background:transparent;border:1px solid var(--gray-300);border-radius:var(--radius);font-size:13px;color:var(--gray-600);text-align:center;cursor:pointer}
+
+/* Carousel nav */
+.carousel-nav{display:flex;align-items:center;gap:8px;margin-top:16px;padding:0 24px}
+.carousel-dots{display:flex;gap:6px}
+.c-dot{width:8px;height:8px;border-radius:50%;background:var(--gray-300);cursor:pointer}
+.c-dot.active{background:var(--green)}
+.carousel-arrows{margin-right:auto;display:flex;gap:8px}
+.c-arrow{width:36px;height:36px;border:1px solid var(--gray-300);border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.c-arrow:hover{background:var(--green);border-color:var(--green)}
+.c-arrow:hover svg{color:var(--white)}
+.c-arrow svg{width:16px;height:16px;color:var(--gray-500)}
+/* ============================================================
+   services-carousel.component.css
+   ============================================================
+
+   KEY RULES FOR WORKING WITH p-carousel:
+   1. Never set padding/margin on .p-carousel-content or .p-carousel-item
+      — PrimeNG calculates item widths based on the container, and any
+        padding shifts those calculations, sending cards off-screen.
+   2. Never nest a <button> inside pTemplate="previousicon/nexticon"
+      — PrimeNG already wraps the icon template in its own <button>,
+        so a nested button causes a double-click / event swallow.
+   3. Never use transform: translateY on cards inside the carousel track
+      — the track has overflow:hidden; translateY moves cards outside the
+        clipping rect and they vanish.
+   ============================================================ */
+
+:host {
+  display: block;
+}
+
+/* ── Give the carousel a little breathing room top/bottom ── */
+:host ::ng-deep .services-carousel {
+  padding-bottom: 8px;
+}
+
+/*
+  Horizontal padding on the viewport wrapper — NOT on the track or items.
+  .p-carousel-items-content is the scroll viewport; padding here does NOT
+  affect item-width calculations.
+*/
+:host ::ng-deep .services-carousel .p-carousel-items-content {
+  padding: 8px 24px 12px;
+}
+
+/* Gap between cards: use margin on the inner card, not padding on the cell */
+:host ::ng-deep .services-carousel .p-carousel-item {
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+/* ── Indicator dots ── */
+:host ::ng-deep .services-carousel .p-carousel-indicators {
+  gap: 6px;
+  padding: 12px 24px 0;
+  justify-content: flex-start;
+}
+
+:host ::ng-deep .services-carousel .p-carousel-indicator button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  border: none;
+  padding: 0;
+  transition: background 0.2s, width 0.2s, border-radius 0.2s;
+  cursor: pointer;
+}
+
+:host ::ng-deep .services-carousel .p-carousel-indicator.p-highlight button {
+  background: var(--green);
+  width: 24px;
+  border-radius: 4px;
+}
+
+:host ::ng-deep .services-carousel .p-carousel-indicator button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* ── Navigator buttons — style PrimeNG's own <button> directly ── */
+:host ::ng-deep .services-carousel .p-carousel-prev,
+:host ::ng-deep .services-carousel .p-carousel-next {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  padding: 0;
+  box-shadow: none;
+  /* Keep arrows in the footer row beside the dots */
+  align-self: center;
+}
+
+:host ::ng-deep .services-carousel .p-carousel-prev:hover,
+:host ::ng-deep .services-carousel .p-carousel-next:hover {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+:host ::ng-deep .services-carousel .p-carousel-prev:focus-visible,
+:host ::ng-deep .services-carousel .p-carousel-next:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* The SVG icons injected via pTemplate="previousicon/nexticon" */
+:host ::ng-deep .services-carousel .p-carousel-prev svg,
+:host ::ng-deep .services-carousel .p-carousel-next svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  pointer-events: none;
+}
+
+/* Footer row: dots left, arrows right */
+:host ::ng-deep .services-carousel .p-carousel-footer,
+:host ::ng-deep .services-carousel .p-carousel-container > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 24px 0;
+}
+
+/* ── Service card ── */
+.service-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  cursor: pointer;
+  /*
+    NO transform on hover — transform creates a new stacking context inside
+    the carousel's overflow:hidden viewport and clips/hides the card.
+    Use box-shadow only to indicate hover state.
+  */
+  transition: box-shadow 0.2s, border-color 0.2s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.service-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-color: var(--green);
+}
+
+.service-card:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.service-card-check {
+  width: 28px;
+  height: 28px;
+  background: var(--green-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.service-card-check svg {
+  width: 14px;
+  height: 14px;
+  color: var(--green);
+}
+
+.service-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--gray-800);
+}
+
+.service-card-desc {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-bottom: 12px;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.service-tag {
+  padding: 2px 8px;
+  background: var(--gray-100);
+  border-radius: 100px;
+  font-size: 11px;
+  color: var(--gray-600);
+}
+
+.service-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.btn-action-primary {
+  flex: 1;
+  padding: 7px;
+  background: var(--green);
+  color: var(--white);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btn-action-primary:hover {
+  background: var(--green-dark);
+}
+
+.btn-action-primary:focus-visible {
+  outline: 2px solid var(--green-dark);
+  outline-offset: 2px;
+}
+
+.btn-action-secondary {
+  flex: 1;
+  padding: 7px;
+  background: transparent;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: var(--gray-600);
+  text-align: center;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btn-action-secondary:hover {
+  background: var(--gray-100);
+}
+
+.btn-action-secondary:focus-visible {
+  outline: 2px solid var(--gray-400);
+  outline-offset: 2px;
+}
