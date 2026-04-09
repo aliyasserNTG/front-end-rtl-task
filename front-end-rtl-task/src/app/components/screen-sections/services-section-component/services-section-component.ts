@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { Router, RouterModule, Routes } from '@angular/router';
+import {ServiceCardComponent} from '@components/reusables/service-card-component/service-card-component';
 
 export interface ServiceCard {
   title: string;
@@ -10,19 +11,12 @@ export interface ServiceCard {
 
 @Component({
   selector: 'app-services-section-component',
-  imports: [CarouselModule],
+  imports: [CarouselModule, ServiceCardComponent],
   templateUrl: './services-section-component.html',
   styleUrl: './services-section-component.css',
 })
 
 export class ServicesSectionComponent {
-  services: ServiceCard[] = [
-    { title: 'عنوان البطاقة', description: 'نص إضافي لمحتوى البطاقة', tags: ['وسم', 'وسم', 'وسم'] },
-    { title: 'عنوان البطاقة', description: 'نص إضافي لمحتوى البطاقة', tags: ['وسم', 'وسم', 'وسم'] },
-    { title: 'عنوان البطاقة', description: 'نص إضافي لمحتوى البطاقة', tags: ['وسم', 'وسم', 'وسم'] },
-    { title: 'عنوان البطاقة', description: 'نص إضافي لمحتوى البطاقة', tags: ['وسم', 'وسم', 'وسم'] },
-    { title: 'عنوان البطاقة', description: 'نص إضافي لمحتوى البطاقة', tags: ['وسم', 'وسم', 'وسم'] },
-  ];
 
   /** Number of cards visible at each breakpoint */
   responsiveOptions = [
@@ -33,7 +27,10 @@ export class ServicesSectionComponent {
   ];
 
   constructor(private router: Router) {}
-
+// Create an array of numbers [0, 1, 2, ... n-1]
+  getIteration(n: number) {
+    return Array.from({ length: n }, (_, i) => i);
+  }
   navigateToService(): void {
     this.router.navigate(['/service']);
   }
