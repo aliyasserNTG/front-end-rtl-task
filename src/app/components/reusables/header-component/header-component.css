@@ -1,0 +1,13 @@
+.navbar{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--gray-200);height:var(--nav-h);display:flex;align-items:center;padding:0 24px;gap:16px}
+.navbar-brand{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.brand-logo{width:44px;height:44px}
+.nav-tabs{display:flex;align-items:center;gap:2px;flex:1}
+.nav-tab{display:flex;align-items:center;gap:4px;padding:6px 12px;font-size:14px;color:var(--gray-600);border-radius:var(--radius);transition:background .15s;cursor:pointer;background:none}
+.nav-tab:hover{background:var(--gray-100)}
+.nav-tab svg{width:14px;height:14px;opacity:.6}
+.nav-actions{display:flex;align-items:center;gap:8px;margin-right:auto}
+.nav-search{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--radius);color:var(--gray-600);font-size:14px;cursor:pointer}
+.nav-search:hover{background:var(--gray-100)}
+.nav-btn-lang{padding:5px 10px;border:1px solid var(--gray-300);border-radius:var(--radius);font-size:13px;color:var(--gray-600);background:var(--white);cursor:pointer}
+.nav-btn-login{padding:6px 16px;background:var(--green);color:var(--white);border-radius:var(--radius);font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px}
+.nav-btn-login:hover{background:var(--green-dark)}
